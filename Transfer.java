@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
+
 public class Transfer {
 
   // **** Sets up our arrays, do not edit  ****
@@ -29,20 +31,36 @@ public class Transfer {
   *
   */
 
+  ArrayList <Food> foodList = new ArrayList<Food>();
+  ArrayList <Parts> partsList = new ArrayList<Parts>();
+  ArrayList <Supplies> suppliesList = new ArrayList<Supplies>();
+
   public Transfer() {
 
-    /*  
-    *   Transfer all the data from the array's to our new ArrayList's here
-    *    -  foodArray data goes into foodList
-    *    -  partsArray data goes into partsList
-    *    -  suppliesArray data goes into suppliesList
-    *
-    *   You can use a for-loop to transfer all our items, or import
-    *   java.util.Arrays and use the Arrays.asList() method
-    */
+    /*
+     *   Transfer all the data from the array's to our new ArrayList's here
+     *    -  foodArray data goes into foodList
+     *    -  partsArray data goes into partsList
+     *    -  suppliesArray data goes into suppliesList
+     *
+     *   You can use a for-loop to transfer all our items, or import
+     *   java.util.Arrays and use the Arrays.asList() method
+     */
+
+    for (int i = 0; i < foodArray.length; i++) {
+      foodList.add(foodArray[i]);
+    }
+
+
+    for (int i = 0; i < partsArray.length; i++) {
+      partsList.add(partsArray[i]);
+    }
+
+    for (int i = 0; i < suppliesArray.length; i++) {
+      suppliesList.add(suppliesArray[i]);
+    }
 
   }
-
 
   public void addItems(int listNumber) {
 
@@ -86,6 +104,9 @@ public class Transfer {
       /* Use the newFoodItem here and enter it into our foodList.
       *  Print to make sure it was successful
       */
+  foodList.add(newFoodItem);
+  System.out.println ("Food Item " + newFoodItem + " added to list!");
+
 
     } else if(listNumber == 2) { // Add to Parts list
 
@@ -102,6 +123,9 @@ public class Transfer {
       *  Print to make sure it was successful
       */
 
+      partsList.add(newPartsItem);
+      System.out.println ("Parts Item " + newPartsItem + " added to list!");
+
     } else { // Add to Supplies list
 
       System.out.print("Supplies name: ");
@@ -114,6 +138,8 @@ public class Transfer {
       /* Use the newSuppliesItem here and enter it into our suppliesList.
       *  Print to make sure it was successful
       */
+      suppliesList.add(newSuppliesItem);
+      System.out.println ("Supplies Item " + newSuppliesItem + " added to list!");
 
     }
   }
@@ -134,6 +160,9 @@ public class Transfer {
   *            Food/Parts/Supplies
   */
 
+  Inventory<Food> foodInventory = new Inventory<Food>();
+  Inventory<Parts> partsInventory = new Inventory<Parts>();
+  Inventory<Supplies> suppliesInventory = new Inventory<Supplies>();
   public void removeItems(int listNumber) {
 
     /*    STEP 6
@@ -152,7 +181,9 @@ public class Transfer {
       /* This is where you will use our generic method searchByName()
       *  and List method remove() for our foodList
       */ 
-      System.out.println("Remove items for foodList not implemented yet."); 
+      int indextOfItem = foodInventory.searchByName(foodList, name);
+      System.out.println ("Removing " + name + " at index " + indextOfItem);
+      foodList.remove(indextOfItem);
 
 
     } else if(listNumber == 2) { // Parts
@@ -192,6 +223,8 @@ public class Transfer {
     *     we edit the correct list with awareness of the listNumber.    
     */
 
+
+
     // These below just gather input from user to use in checkQty()
     Scanner keyboard = new Scanner(System.in);
     System.out.println("\nName of Item to Edit: ");
@@ -204,7 +237,7 @@ public class Transfer {
       /* This is where you will use our generic method checkQty()
       *  for our foodList.
       */
-      System.out.println("Edit Quantity for foodList not implemented yet.");
+    Food foodTemp = foodInventory.checkQty(foodList, name, desiredQty);
 
 
     } else if(listNumber == 2) { // Parts
@@ -242,9 +275,8 @@ public class Transfer {
 
     
     // Erase the below print message once ArrayLists have been made
-    System.out.println("\nLists do not exist yet to print!!");
-    /* Once you have created your three lists in Step 1, erase this comment
-    
+   // System.out.println("\nLists do not exist yet to print!!");
+
 
 
     if(foodList.isEmpty() && partsList.isEmpty() && suppliesList.isEmpty()) {
@@ -288,6 +320,5 @@ public class Transfer {
     }
 
 
-    Once you have created your lists, erase this comment */
   }
 }
